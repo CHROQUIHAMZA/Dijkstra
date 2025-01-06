@@ -1,3 +1,4 @@
+
 #include "Liste.h"
 
 Liste::Liste()
@@ -5,7 +6,7 @@ Liste::Liste()
     L = nullptr;
 }
 
-LST* Liste::creerNoeud(int value,int distance)
+LST* Liste::creerNoeud(int value, int distance)
 {
     LST* ne = new LST();
     if (!ne) {
@@ -15,6 +16,16 @@ LST* Liste::creerNoeud(int value,int distance)
     ne->value = value;
     ne->distance = distance;
     return ne;
+}
+LST* Liste::getNeighbour(int value) {
+    LST* temp = L;
+    while (temp != nullptr) {
+        if (temp->value == value) {
+            return temp;
+        }
+        temp = temp->svt;
+    }
+    return nullptr;  // Pas de voisin trouvé
 }
 
 void Liste::inserer(int value,int distance)
@@ -26,18 +37,29 @@ void Liste::inserer(int value,int distance)
         while (courant->svt) courant = courant->svt;
         courant->svt = ne;
     }
-        
+
 }
 
 void Liste::afficher()
 {
     for (LST* courant = L; courant;) {
-        cout << courant->value << "("<<courant->distance<<") ";
+        cout << courant->value << " (" << courant->distance << ") ";
         courant = courant->svt;
     }
     cout << endl;
 }
+void Liste::addList(LST* ne) {
 
+    if (!L) {
+        L = ne;
+        return;
+    }
+    LST* courant = L;
+    while (courant->svt) courant = courant->svt;
+    courant->svt = ne;
+    return;
+
+}
 
 
 Liste::~Liste()
@@ -48,5 +70,5 @@ Liste::~Liste()
         L = L->svt;
         delete temp;
     }
-    
+
 }

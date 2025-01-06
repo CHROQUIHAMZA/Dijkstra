@@ -1,3 +1,4 @@
+
 #pragma once
 #include<iostream>
 using namespace std;
@@ -8,14 +9,14 @@ typedef struct lst {
 }LST;
 class Liste
 {
-private:
+public:
 	LST* L;
-public :
+public:
 	Liste();
 	LST* creerNoeud(int value,int distance);
-	void inserer(int value,int distance);
+	void inserer(int value, int distance);
 	void afficher();
-	//LST* supprimerNoeud(int value);
+	void addList(LST* L);
+	LST* getNeighbour(int value);
 	~Liste();
 };
-
